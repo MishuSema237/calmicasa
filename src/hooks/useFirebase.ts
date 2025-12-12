@@ -5,9 +5,8 @@ import {
   getRedirectResult,
   signInWithRedirect,
   GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-
+  signInWithEmailAndPassword as firebaseSignIn,
+  createUserWithEmailAndPassword as firebaseSignUp,
   getAuth,
   User,
 } from "firebase/auth";
@@ -25,7 +24,6 @@ interface AuthMethods {
 const useFirebaseAuth = (): { user: User | null } & AuthMethods => {
   firebaseInit();
   const [user, setUser] = useState<User | null>(null);
-  console.log(user);
   const auth = getAuth();
 
   useEffect(() => {
@@ -36,11 +34,8 @@ const useFirebaseAuth = (): { user: User | null } & AuthMethods => {
         setUser(null);
       }
     });
-
     return () => unsubscribe();
   }, [auth]);
-
-
 
   const signInWithGoogle = async (usePopup = true): Promise<void> => {
     const provider = new GoogleAuthProvider();
@@ -51,9 +46,13 @@ const useFirebaseAuth = (): { user: User | null } & AuthMethods => {
     }
   };
 
+  const handleSignInWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+    await firebaseSignIn(auth, email, password);
+  };
 
-
-
+  const handleSignUpWithEmailAndPassword = async (email: string, password: string): Promise<void> => {
+    await firebaseSignUp(auth, email, password);
+  };
 
   useEffect(() => {
     const handleRedirectResult = async (): Promise<void> => {
@@ -66,11 +65,8 @@ const useFirebaseAuth = (): { user: User | null } & AuthMethods => {
         console.error("Error handling redirect:", error);
       }
     };
-
     handleRedirectResult();
   }, [auth]);
-
-
 
   const signOut = async (): Promise<void> => {
     try {
@@ -83,12 +79,10 @@ const useFirebaseAuth = (): { user: User | null } & AuthMethods => {
   return {
     user,
     signInWithGoogle,
-    signInWithEmailAndPassword,
-    signUpWithEmailAndPassword,
-
+    signInWithEmailAndPassword: handleSignInWithEmailAndPassword,
+    signUpWithEmailAndPassword: handleSignUpWithEmailAndPassword,
     signOut,
   };
 };
 
 export default useFirebaseAuth;
-
