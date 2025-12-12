@@ -49,7 +49,7 @@ export default function AdminLayout({
         <div className="min-h-screen bg-gray-50 flex">
             {/* Sidebar - Desktop */}
             <div className={`hidden md:block transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'} flex-shrink-0`}>
-                <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
             </div>
 
             {/* Main Content */}
