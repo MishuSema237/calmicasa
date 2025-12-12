@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const token = authHeader.substring(7)
+    // const token = authHeader.substring(7)
     // We import verifyToken dynamically to avoid circular dependencies if any, 
     // or just assume standard import which is safer.
     // Ideally we import it at the top.

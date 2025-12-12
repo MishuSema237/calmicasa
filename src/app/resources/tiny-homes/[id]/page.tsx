@@ -4,7 +4,7 @@ import { useState, use } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Check, Lock, CreditCard, Star, MapPin, Ruler, Bed, Bath } from 'lucide-react'
+import { ArrowLeft, Check, Lock, CreditCard, Star, MapPin, Ruler, Bed, Bath, X } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 // Mock Data (In a real app, you'd fetch this from your API based on the ID)
