@@ -1,6 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongodb'
 import { sendEmail } from '@/lib/nodemailer'
+import { verifyToken } from '@/lib/auth'
+
+const checkAuth = (request: NextRequest) => {
+    const authHeader = request.headers.get('authorization')
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return null
+    return verifyToken(authHeader.substring(7))
+}
+
+export async function GET(request: NextRequest) {
+    const user = checkAuth(request)
+    if (!user || !user.isAdmin) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    try {
+        const db = await getDatabase()
+        const orders = await db.collection('orders').find({}).sort({ createdAt: -1 }).toArray()
+        return NextResponse.json(orders)
+    } catch (error) {
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    }
+}
 
 export async function POST(request: NextRequest) {
     try {

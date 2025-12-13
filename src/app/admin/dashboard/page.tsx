@@ -49,7 +49,7 @@ export default function AdminDashboard() {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white"
+                className="bg-gray-900 rounded-2xl p-8 text-white relative overflow-hidden"
             >
                 <h2 className="text-3xl font-bold mb-2">Welcome to CalmiCasa Admin</h2>
                 <p className="text-blue-100">

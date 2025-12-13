@@ -23,7 +23,12 @@ export default function AdminGalleryPage() {
         try {
             const res = await fetch('/api/gallery')
             const data = await res.json()
-            setImages(data)
+            if (Array.isArray(data)) {
+                setImages(data)
+            } else {
+                console.error("Expected array but got:", data)
+                setImages([])
+            }
         } catch (err) {
             console.error(err)
         } finally {

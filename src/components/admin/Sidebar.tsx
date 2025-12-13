@@ -14,6 +14,8 @@ import {
     Menu,
     X,
     Home,
+    ShoppingBag,
+    Users,
 } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -28,8 +30,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
     const menuItems = [
         { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+        { href: '/admin/orders', icon: ShoppingBag, label: 'Orders' },
+        { href: '/admin/tiny-homes', icon: Home, label: 'Tiny Homes' },
         { href: '/admin/blog', icon: FileText, label: 'Blog Posts' },
         { href: '/admin/gallery', icon: ImageIcon, label: 'Gallery' },
+        { href: '/admin/plans', icon: FileText, label: 'Plans' },
+        { href: '/admin/builders', icon: Users, label: 'Builders' },
         { href: '/admin/events', icon: Calendar, label: 'Events' },
         { href: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
     ]
@@ -73,8 +79,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {/* Header */}
                 <div className="p-6 border-b border-gray-800 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
-                            <Home className="w-5 h-5" />
+                        <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center border border-gray-700">
+                            <Home className="w-5 h-5 text-white" />
                         </div>
                         <span className="text-xl font-bold">CalmiCasa</span>
                     </Link>
@@ -99,7 +105,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                                     href={item.href}
                                     onClick={handleLinkClick}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
-                                        ? 'bg-gradient-to-r from-blue-600 to-green-600 text-white'
+                                        ? 'bg-gray-800 text-white border-l-4 border-white'
                                         : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                                         }`}
                                 >

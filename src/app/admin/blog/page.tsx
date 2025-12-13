@@ -28,7 +28,12 @@ export default function AdminBlogPage() {
         try {
             const res = await fetch('/api/blog')
             const data = await res.json()
-            setPosts(data)
+            if (Array.isArray(data)) {
+                setPosts(data)
+            } else {
+                console.error("Expected array but got:", data)
+                setPosts([])
+            }
         } catch (err) {
             console.error(err)
         } finally {
