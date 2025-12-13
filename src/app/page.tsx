@@ -64,10 +64,6 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="mb-6 inline-flex items-center px-4 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
-              <span className="text-sm font-medium tracking-wide uppercase">The Future of Living</span>
-            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
               Less Space.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
