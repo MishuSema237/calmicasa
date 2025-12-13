@@ -63,9 +63,6 @@ export default function Navigation() {
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2">
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${getLogoClasses()}`}>
-                                <span className="font-bold text-lg">C</span>
-                            </div>
                             <span className="text-2xl font-bold tracking-tight">CalmiCasa</span>
                         </Link>
 
@@ -90,8 +87,8 @@ export default function Navigation() {
                             <Link
                                 href="/shop"
                                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold transition-all ${effectiveIsScrolled
-                                        ? 'bg-gray-900 text-white hover:bg-gray-800'
-                                        : 'bg-white text-gray-900 hover:bg-gray-100'
+                                    ? 'bg-gray-900 text-white hover:bg-gray-800'
+                                    : 'bg-white text-gray-900 hover:bg-gray-100'
                                     }`}
                             >
                                 <ShoppingBag className="w-4 h-4" /> Shop
