@@ -57,9 +57,9 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
               >
                 <X className="w-4 h-4" />
               </button>
-              
+
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Download className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -74,22 +74,22 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                 <p className="text-gray-600 mb-4">
                   Discover everything you need to know with our Ultimate Small Home Guide.
                 </p>
-                
+
                 <div className="space-y-3 text-left">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-gray-700">Explore the Pros and Cons of small home living.</p>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-gray-700">Reflect on Essential Questions before you start.</p>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-black rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-gray-700">Get Inspired with stunning design ideas.</p>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-600 mt-4 font-medium">
                   Subscribe Now and get instant FREE access to this invaluable guide plus other resources.
                 </p>
@@ -112,7 +112,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-black transition-colors"
                       placeholder="Enter your name"
                     />
                   </div>
@@ -133,7 +133,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-black transition-colors"
                       placeholder="Enter your email"
                     />
                   </div>
@@ -143,7 +143,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-green-700 transition-colors"
+                  className="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-lg"
                 >
                   Get Free Guide Now
                 </motion.button>

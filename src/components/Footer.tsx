@@ -1,11 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Home, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react'
 
 const Footer = () => {
+  const pathname = usePathname()
   const currentYear = new Date().getFullYear()
+
+  if (pathname?.startsWith('/admin')) return null
 
   // Removed Services links as requested, except Shop which is now top level but user said 'remove shop from the bottom footer and all service links'
   // So I removed the entire Services column.

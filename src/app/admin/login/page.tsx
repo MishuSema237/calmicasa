@@ -11,6 +11,8 @@ export default function AdminLoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
 
     // Default authLoading to false to prevent "blank page" if hook fails to update
@@ -27,6 +29,7 @@ export default function AdminLoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
+        setSubmitting(true)
 
         const result = await login(email, password)
 
@@ -34,6 +37,7 @@ export default function AdminLoginPage() {
             router.push('/admin/dashboard')
         } else {
             setError(result.error || 'Login failed')
+            setSubmitting(false)
         }
     }
 
@@ -101,21 +105,37 @@ export default function AdminLoginPage() {
                                 <Lock className="h-5 w-5 text-gray-400" />
                             </div>
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-colors"
+                                className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition-colors"
                                 placeholder="••••••••"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+                            >
+                                {showPassword ? (
+                                    <span className="text-xs font-medium">Hide</span>
+                                ) : (
+                                    <span className="text-xs font-medium">Show</span>
+                                )}
+                            </button>
                         </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-gray-800 transition-colors shadow-lg"
+                        disabled={submitting}
+                        className="w-full bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-gray-800 transition-colors shadow-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                     >
-                        Sign In
+                        {submitting ? (
+                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-white/30 border-t-white" />
+                        ) : (
+                            'Sign In'
+                        )}
                     </button>
                 </form>
 
