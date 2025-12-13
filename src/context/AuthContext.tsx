@@ -10,6 +10,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null
+    token: string | null
     loading: boolean
     isAuthenticated: boolean
     login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
@@ -20,6 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null)
+    const [token, setToken] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
     const router = useRouter()
 
@@ -29,15 +31,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const checkAuth = async () => {
         try {
-            const token = localStorage.getItem('authToken')
-            if (!token) {
+            const storedToken = localStorage.getItem('authToken')
+            if (!storedToken) {
                 setLoading(false)
                 return
             }
+            // Optimistically set token
+            setToken(storedToken)
 
             const response = await fetch('/api/auth/verify', {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${storedToken}`,
                 },
             })
 
@@ -47,11 +51,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             } else {
                 localStorage.removeItem('authToken')
                 setUser(null)
+                setToken(null)
             }
         } catch (error) {
             console.error('Auth check failed:', error)
             localStorage.removeItem('authToken')
             setUser(null)
+            setToken(null)
         } finally {
             setLoading(false)
         }
@@ -72,6 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             if (response.ok) {
                 localStorage.setItem('authToken', data.token)
                 setUser(data.user)
+                setToken(data.token)
                 return { success: true }
             } else {
                 return { success: false, error: data.error || 'Login failed' }
@@ -91,12 +98,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } finally {
             localStorage.removeItem('authToken')
             setUser(null)
+            setToken(null)
             router.push('/admin/login')
         }
     }
 
     return (
-        <AuthContext.Provider value={{ user, loading, isAuthenticated: !!user, login, logout }}>
+        <AuthContext.Provider value={{ user, token, loading, isAuthenticated: !!user, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

@@ -15,13 +15,13 @@ export default function ResourcesPage() {
     ]
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900">
+        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 text-gray-900">
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-                {/* Cinematic Background Gradients - Subtle Light */}
-                <div className="absolute top-0 left-0 w-full h-full bg-white z-0"></div>
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-[120px] pointer-events-none"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-green-100/50 rounded-full blur-[120px] pointer-events-none"></div>
+                {/* Cinematic Background Gradients - Warm & Welcoming */}
+                <div className="absolute top-0 left-0 w-full h-full bg-white/50 z-0"></div>
+                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-[120px] pointer-events-none"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-[120px] pointer-events-none"></div>
 
                 <div className="max-w-7xl mx-auto text-center relative z-10">
                     <motion.div

@@ -4,6 +4,7 @@ import './globals.css'
 //import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { AuthProvider } from '@/context/AuthContext'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,6 +46,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <Toaster position="top-center" />
         </AuthProvider>
       </body>
     </html>
