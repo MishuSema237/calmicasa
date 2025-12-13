@@ -47,9 +47,6 @@ const Footer = () => {
             className="lg:col-span-1"
           >
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-white text-gray-900 rounded-lg flex items-center justify-center font-bold">
-                C
-              </div>
               <span className="text-xl font-bold">CalmiCasa</span>
             </div>
             <p className="text-gray-300 mb-6">

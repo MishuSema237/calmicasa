@@ -99,8 +99,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                                     href={item.href}
                                     onClick={handleLinkClick}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
-                                            ? 'bg-gradient-to-r from-blue-600 to-green-600 text-white'
-                                            : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                                        ? 'bg-gradient-to-r from-blue-600 to-green-600 text-white'
+                                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                                         }`}
                                 >
                                     <Icon className="w-5 h-5" />
