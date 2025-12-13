@@ -11,7 +11,7 @@ export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const pathname = usePathname()
 
-    if (pathname?.startsWith('/admin')) return null
+
 
     // Define pages that show a dark hero/image at the top, allowing for transparent nav
     const hasDarkHero =
