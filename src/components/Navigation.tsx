@@ -56,6 +56,9 @@ export default function Navigation() {
         return effectiveIsScrolled ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'
     }
 
+    // Hide Navigation on all Admin pages (including Login)
+    if (pathname?.startsWith('/admin')) return null
+
     return (
         <>
             <nav
