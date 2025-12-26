@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getDatabase } from '@/lib/mongodb'
-import { Ruler, Users, ArrowRight, Bed, Bath, Move, MapPin, Layers } from 'lucide-react'
+import { Ruler, Users, ArrowRight, Bed, Bath, Move, MapPin, Layers, Image as ImageIcon } from 'lucide-react'
 
 // Fetch data directly from DB for Server Component
 async function getTinyHomes() {

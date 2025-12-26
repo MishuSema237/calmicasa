@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, Loader2, Home, X, Save, MapPin, Ruler, Cpu, User, Image, Upload, AlertCircle } from 'lucide-react'
+import { Plus, Edit, Trash2, Loader2, Home, X, Save, MapPin, Ruler, Cpu, User, Image as ImageIcon, Upload, AlertCircle, Search } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -385,7 +385,7 @@ export default function AdminTinyHomesPage() {
                                 { id: 'specs', label: 'Specs & Tech', icon: Ruler },
                                 { id: 'features', label: 'Features', icon: Cpu },
                                 { id: 'agent', label: 'Agent', icon: User },
-                                { id: 'images', label: 'Images', icon: Image },
+                                { id: 'images', label: 'Images', icon: ImageIcon },
                             ].map(tab => {
                                 const Icon = tab.icon
                                 const isActive = activeTab === tab.id
@@ -577,7 +577,7 @@ export default function AdminTinyHomesPage() {
                                         />
                                         <div className="flex flex-col items-center gap-2 text-gray-500">
                                             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                                                <Image className="w-6 h-6" />
+                                                <ImageIcon className="w-6 h-6" />
                                             </div>
                                             <p className="text-sm font-medium">Click to select images</p>
                                             <p className="text-xs">PNG, JPG up to 5MB</p>
@@ -604,7 +604,7 @@ export default function AdminTinyHomesPage() {
                                             <div className="grid grid-cols-4 gap-2">
                                                 {pendingFiles.map((file, idx) => (
                                                     <div key={idx} className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden border border-blue-200">
-                                                        <img src={URL.createObjectURL(file)} className="w-full h-full object-cover opacity-75" />
+                                                        <img src={URL.createObjectURL(file)} alt="Pending upload" className="w-full h-full object-cover opacity-75" />
                                                         <button
                                                             type="button"
                                                             onClick={() => removePendingFile(idx)}

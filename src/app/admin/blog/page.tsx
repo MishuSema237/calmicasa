@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, Loader2, Image as ImageIcon, Save, X, FileText } from 'lucide-react'
+import { Plus, Edit, Trash2, Loader2, Image as ImageIcon, Save, X, FileText, Search } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 
 type Blog = {
@@ -235,7 +235,7 @@ export default function AdminBlogPage() {
                             <div>
                                 <label className="block text-sm font-medium mb-1">Cover Image</label>
                                 <div className="border border-gray-200 rounded-lg p-2 flex items-center gap-4">
-                                    {formData.image && <img src={formData.image} className="w-16 h-16 object-cover rounded bg-gray-100" />}
+                                    {formData.image && <img src={formData.image} alt="Preview" className="w-16 h-16 object-cover rounded bg-gray-100" />}
                                     <input type="file" onChange={handleImageUpload} className="text-sm" accept="image/*" />
                                 </div>
                             </div>
