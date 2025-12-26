@@ -3,20 +3,44 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Users, Palette, MessageCircle, ShoppingBag, Camera, BookOpen, Calendar, UserPlus, MapPin, Home, Play } from 'lucide-react'
+import { ArrowRight, Users, Palette, MessageCircle, ShoppingBag, Camera, BookOpen, Calendar, UserPlus, MapPin, Home, Play, BadgeDollarSign, Map, PencilRuler, Truck, ShieldCheck } from 'lucide-react'
 import Modal from '@/components/Modal'
 import { useModal } from '@/hooks/useModal'
 
 export default function HomePage() {
   const { isOpen, closeModal } = useModal()
 
-  const services = [
-    { name: 'Community', href: '/services/community', icon: Users, description: 'Join our vibrant community of tiny home enthusiasts.', span: 'md:col-span-8' },
-    { name: 'Membership', href: '/services/membership', icon: UserPlus, description: 'Exclusive perks & discounts.', span: 'md:col-span-4' },
-    { name: 'Online Event', href: '/services/online-event', icon: Calendar, description: 'Virtual workshops.', span: 'md:col-span-4' },
-    { name: '3D Designer', href: '/services/3d-designer', icon: Palette, description: 'Visualize your dream home with our custom tool.', span: 'md:col-span-8' },
-    { name: 'Consulting', href: '/services/consulting', icon: MessageCircle, description: 'Expert guidance.', span: 'md:col-span-6' },
-    { name: 'Shop', href: '/shop', icon: ShoppingBag, description: 'Curated essentials for compact living.', span: 'md:col-span-6' },
+  const ecosystemFeatures = [
+    {
+      name: 'Smart Financing',
+      icon: BadgeDollarSign,
+      description: 'Flexible payment plans and partnerships with top tiny-home lenders.',
+      span: 'md:col-span-4'
+    },
+    {
+      name: 'Land Assistance',
+      icon: Map,
+      description: 'We help you navigate zoning laws and find the perfect spot.',
+      span: 'md:col-span-4'
+    },
+    {
+      name: 'Custom Design',
+      icon: PencilRuler,
+      description: 'Collaborate with our architects to tailor every inch of your space.',
+      span: 'md:col-span-4'
+    },
+    {
+      name: 'Professional Delivery',
+      icon: Truck,
+      description: 'White-glove shipping and professional on-site setup at your location.',
+      span: 'md:col-span-6'
+    },
+    {
+      name: '10-Year Warranty',
+      icon: ShieldCheck,
+      description: 'Structural warranty and a dedicated support team for life.',
+      span: 'md:col-span-6'
+    },
   ]
 
   const featuredHomes = [
@@ -66,8 +90,21 @@ export default function HomePage() {
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
               Less Space.<br />
-              <span className="text-white">
-                More Freedom.
+              More <span className="relative inline-block mt-2">
+                <span className="relative z-10 text-black">Freedom.</span>
+                {/* Custom Brush Stroke */}
+                <svg
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%]  -z-0 text-blue-600 opacity-90"
+                  viewBox="0 0 500 500"
+                  preserveAspectRatio="none"
+                >
+                  <g transform="matrix(1, 0, 0, 1, 209.8228, 182.775528)">
+                    <path
+                      d="M 266.104 36.352 C 307.627 31.725 228.584 24.012 192.565 21.313 C 156.544 18.613 131.032 13.6 206.07 15.529 C 281.112 17.071 273.607 8.973 159.546 1.647 C 44.985 -6.066 -143.12 0.104 -143.12 0.104 C -223.66 -0.281 -189.14 56.018 -195.14 72.599 C -201.15 89.181 -192.65 102.292 -184.64 112.704 C -176.64 122.73 -186.64 125.043 -156.12 133.912 C -125.62 142.781 -64.074 127.743 119.526 125.043 C 294.118 122.344 212.074 111.547 172.054 108.461 C 132.03 105.377 149.542 102.678 216.576 99.978 C 283.613 97.664 207.571 91.88 214.074 85.711 C 221.079 79.54 303.623 79.54 240.589 72.213 C 228.584 70.671 266.605 61.803 236.588 60.26 C 206.572 58.718 216.576 55.247 255.099 54.091 C 293.117 52.933 267.603 45.22 246.092 44.064 C 225.081 43.292 224.582 40.979 266.104 36.352 Z"
+                      fill="white"
+                    />
+                  </g>
+                </svg>
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
@@ -84,15 +121,13 @@ export default function HomePage() {
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <button
-                  onClick={() => { }} // Placeholder for video modal maybe?
+                <Link
+                  href="/help/contact"
                   className="flex items-center gap-3 px-8 py-4 rounded-full border border-white/30 bg-black/20 backdrop-blur hover:bg-black/40 transition-all text-white font-semibold"
                 >
-                  <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">
-                    <Play className="w-3 h-3 ml-0.5 fill-black" />
-                  </div>
-                  Watch Reel
-                </button>
+
+                  Talk to an Expert
+                </Link>
               </motion.div>
             </div>
           </motion.div>
@@ -145,7 +180,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Section - Bento Grid */}
+      {/* Ecosystem Section - Bento Grid */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -157,31 +192,28 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {services.map((service, index) => (
+            {ecosystemFeatures.map((feature, index) => (
               <motion.div
-                key={service.name}
+                key={feature.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`${service.span} group relative bg-gray-50 rounded-3xl p-8 hover:bg-gray-900 hover:text-white transition-all duration-300 overflow-hidden min-h-[280px] flex flex-col justify-between`}
+                className={`${feature.span} group relative bg-white border border-gray-100 rounded-3xl p-8 md:hover:bg-gray-900 md:hover:text-white transition-all duration-300 overflow-hidden min-h-[280px] flex flex-col justify-between shadow-sm`}
               >
-                <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 scale-150 transition-all duration-500">
-                  <service.icon className="w-40 h-40" />
+                {/* Large Background Icon (Gray) - Static on mobile, interactive on desktop if desired, but user asked for "background", so keeping it visible */}
+                <div className="absolute -bottom-8 -right-8 opacity-10 md:group-hover:opacity-20 scale-150 transition-all duration-500">
+                  <feature.icon className="w-48 h-48 text-gray-400" />
                 </div>
 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-white/20 group-hover:text-white transition-colors">
-                    <service.icon className="w-7 h-7 text-gray-900 group-hover:text-white" />
+                  <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm md:group-hover:bg-white/20 md:group-hover:text-white transition-colors">
+                    <feature.icon className="w-7 h-7 text-gray-500 md:group-hover:text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">{service.name}</h3>
-                  <p className="text-gray-500 group-hover:text-gray-300 font-medium">{service.description}</p>
-                </div>
-
-                <div className="relative z-10 pt-8">
-                  <Link href={service.href} className="inline-flex items-center font-bold text-sm tracking-wide uppercase border-b border-gray-300 pb-1 group-hover:border-white/50">
-                    Explore <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900 md:group-hover:text-white">{feature.name}</h3>
+                  <p className="text-gray-500 md:group-hover:text-gray-300 font-medium leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -190,20 +222,20 @@ export default function HomePage() {
       </section>
 
       {/* Resources Section - Magazine Layout */}
-      <section className="py-32 bg-gray-900 text-white relative overflow-hidden">
+      <section className="py-14 bg-gray-900 text-white relative overflow-hidden">
         {/* Abstract Background Shapes */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-6xl font-bold mb-6">The Knowledge Hub.</h2>
               <p className="text-xl text-gray-400">
                 Dive deep into the world of tiny living. Our curated resources are designed to take you from curious beginner to expert builder.
               </p>
             </div>
-            <Link href="/resources" className="px-8 py-4 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-200 transition-colors">
+            <Link href="/resources" className="px-8 py-4 bg-white text-gray-900 hidden sm:block rounded-full font-bold hover:bg-gray-200 transition-colors">
               View All Resources
             </Link>
           </div>
@@ -217,12 +249,12 @@ export default function HomePage() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-40"
               />
-              <div className="absolute inset-0 p-10 flex flex-col justify-end">
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <div className="flex items-center gap-2 text-blue-400 font-bold mb-2 uppercase tracking-wider text-sm">
                   <Home className="w-4 h-4" /> Signature Collection
                 </div>
                 <h3 className="text-4xl font-bold mb-4">Explore Our Tiny Homes</h3>
-                <p className="text-gray-300 max-w-md mb-8">
+                <p className="text-gray-300 max-w-md mb-8 hidden sm:block">
                   Discover our award-winning designs that blend functionality with breathtaking aesthetics.
                 </p>
                 <Link href="/resources/tiny-homes" className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur border border-white/20 rounded-lg hover:bg-white hover:text-black transition-all w-fit font-bold">
@@ -240,7 +272,6 @@ export default function HomePage() {
                 className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
               />
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <BookOpen className="w-8 h-8 text-green-400 mb-4" />
                 <h3 className="text-2xl font-bold">Build Plans</h3>
                 <Link href="/resources/plans" className="text-gray-300 text-sm mt-2 hover:text-white flex items-center gap-1">
                   Start Building <ArrowRight className="w-3 h-3" />
@@ -257,7 +288,6 @@ export default function HomePage() {
                 className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
               />
               <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <Camera className="w-8 h-8 text-purple-400 mb-4" />
                 <h3 className="text-2xl font-bold">Inspiration Gallery</h3>
                 <Link href="/resources/gallery" className="text-gray-300 text-sm mt-2 hover:text-white flex items-center gap-1">
                   Browse Photos <ArrowRight className="w-3 h-3" />
@@ -280,6 +310,9 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+          <Link href="/resources" className="text-center mt-8 px-8 py-4 bg-white text-gray-900 block sm:hidden rounded-full font-bold hover:bg-gray-200 transition-colors">
+            View All Resources
+          </Link>
         </div>
       </section>
 

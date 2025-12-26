@@ -13,8 +13,9 @@ export async function GET(request: NextRequest) {
         const db = await getDatabase()
         const homes = await db.collection('tiny_homes').find({}).toArray()
         return NextResponse.json(homes)
-    } catch (error) {
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    } catch (error: any) {
+        console.error('Error fetching tiny homes:', error)
+        return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 })
     }
 }
 
@@ -38,7 +39,8 @@ export async function POST(request: NextRequest) {
         })
 
         return NextResponse.json({ success: true, id: result.insertedId })
-    } catch (error) {
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    } catch (error: any) {
+        console.error('Error creating tiny home:', error)
+        return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 })
     }
 }

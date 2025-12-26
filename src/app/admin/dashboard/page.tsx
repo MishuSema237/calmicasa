@@ -1,9 +1,15 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import { useAuth } from '@/hooks/useAuth'
 import { motion } from 'framer-motion'
 import { FileText, Image as ImageIcon, Calendar, MessageSquare, Users, TrendingUp } from 'lucide-react'
 
 export default function AdminDashboard() {
+    const { token } = useAuth()
+    const [orders, setOrders] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+
     const stats = [
         {
             label: 'Total Blog Posts',
@@ -43,6 +49,28 @@ export default function AdminDashboard() {
         { action: 'System initialized', time: 'Just now', type: 'info' },
     ]
 
+    useEffect(() => {
+        const fetchOrders = async () => {
+            if (!token) return
+            try {
+                const res = await fetch('/api/order', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if (res.ok) {
+                    const data = await res.json()
+                    setOrders(data)
+                }
+            } catch (error) {
+                console.error('Failed to fetch orders', error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchOrders()
+    }, [token])
+
     return (
         <div className="space-y-6">
             {/* Welcome Section */}
@@ -81,7 +109,7 @@ export default function AdminDashboard() {
                 })}
             </div>
 
-            {/* Recent Activity */}
+            {/* Recent Activity & Recent Orders */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -103,43 +131,40 @@ export default function AdminDashboard() {
                     </div>
                 </motion.div>
 
-                {/* Quick Actions */}
+                {/* Recent Orders (Replaces Quick Actions) */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                     className="bg-white rounded-xl p-6 shadow-sm"
                 >
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                    <div className="space-y-3">
-                        <a
-                            href="/admin/blog"
-                            className="block p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
-                        >
-                            <div className="flex items-center gap-3">
-                                <FileText className="w-5 h-5 text-blue-600" />
-                                <span className="font-medium text-gray-900">Create New Blog Post</span>
-                            </div>
-                        </a>
-                        <a
-                            href="/admin/gallery"
-                            className="block p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
-                        >
-                            <div className="flex items-center gap-3">
-                                <ImageIcon className="w-5 h-5 text-green-600" />
-                                <span className="font-medium text-gray-900">Upload to Gallery</span>
-                            </div>
-                        </a>
-                        <a
-                            href="/admin/events"
-                            className="block p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors"
-                        >
-                            <div className="flex items-center gap-3">
-                                <Calendar className="w-5 h-5 text-purple-600" />
-                                <span className="font-medium text-gray-900">Add New Event</span>
-                            </div>
-                        </a>
+                    <div className="flex justify-between items-center mb-4">
+                        <h3 className="text-lg font-semibold text-gray-900">Recent Orders</h3>
+                        <a href="/admin/orders" className="text-sm text-blue-600 hover:text-blue-700 font-medium">View All</a>
                     </div>
+
+                    {loading ? (
+                        <div className="text-center py-8 text-gray-500">Loading orders...</div>
+                    ) : orders.length === 0 ? (
+                        <div className="text-center py-8 text-gray-500 bg-gray-50 rounded-lg">No recent orders found.</div>
+                    ) : (
+                        <div className="space-y-3">
+                            {orders.slice(0, 5).map((order) => (
+                                <div key={order._id} className="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
+                                    <div className="flex justify-between items-start mb-1">
+                                        <span className="font-bold text-gray-900">{order.modelName}</span>
+                                        <span className={`text-xs px-2 py-0.5 rounded-full ${order.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}`}>
+                                            {order.status}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-sm text-gray-500">
+                                        <span>{order.customerName}</span>
+                                        <span>{new Date(order.createdAt).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </motion.div>
             </div>
         </div>

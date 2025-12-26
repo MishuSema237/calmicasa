@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getDatabase } from '@/lib/mongodb'
 import { verifyToken } from '@/lib/auth'
 import { ObjectId } from 'mongodb'
+import { deleteFileFromUrl } from '@/lib/supabase'
 
 const checkAuth = (request: NextRequest) => {
     const authHeader = request.headers.get('authorization')
@@ -58,6 +59,13 @@ export async function DELETE(request: NextRequest) {
         if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 })
 
         const db = await getDatabase()
+
+        // Fetch the image first to get its URL for cleanup
+        const item = await db.collection('gallery').findOne({ _id: new ObjectId(id) })
+        if (item && item.src) {
+            await deleteFileFromUrl(item.src)
+        }
+
         await db.collection('gallery').deleteOne({ _id: new ObjectId(id) })
 
         return NextResponse.json({ success: true })

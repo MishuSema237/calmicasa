@@ -31,7 +31,7 @@ export default function Navigation() {
     }, [])
 
     const navLinks = [
-        { name: 'Shop', href: '/shop' },
+        { name: 'Shop', href: '/resources/tiny-homes' },
         { name: 'Resources', href: '/resources' },
         { name: 'About', href: '/help/about' },
         { name: 'Help', href: '/help' },
@@ -90,7 +90,7 @@ export default function Navigation() {
                             </Link>
 
                             <Link
-                                href="/shop"
+                                href="/resources/tiny-homes"
                                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold transition-all ${effectiveIsScrolled
                                     ? 'bg-gray-900 text-white hover:bg-gray-800'
                                     : 'bg-white text-gray-900 hover:bg-gray-100'
@@ -140,8 +140,7 @@ export default function Navigation() {
                             </Link>
                             <hr className="border-gray-100" />
                             <Link
-                                href="/shop"
-                                onClick={() => setMobileMenuOpen(false)}
+                                href="/resources/tiny-homes"
                                 className="px-6 py-4 bg-gray-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 mx-4"
                             >
                                 <ShoppingBag className="w-5 h-5" /> Shop Now

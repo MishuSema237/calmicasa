@@ -48,13 +48,28 @@ export default function AdminLayout({
     return (
         <div className="min-h-screen bg-gray-50 flex">
             {/* Sidebar - Desktop */}
-            <div className={`hidden md:block transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'} flex-shrink-0`}>
-                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <div className={`hidden md:block transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'} flex-shrink-0 relative`}>
+                <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(!isSidebarOpen)} />
+            </div>
+
+            {/* Sidebar - Mobile */}
+            <div className={`md:hidden fixed inset-0 z-50 transform transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="absolute inset-0 bg-black/50" onClick={() => setIsSidebarOpen(false)}></div>
+                <div className="relative w-64 h-full bg-white shadow-xl">
+                    <Sidebar isOpen={true} onClose={() => setIsSidebarOpen(false)} mobile />
+                </div>
             </div>
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
-                {/* Mobile Header / Top Bar could go here */}
+                {/* Mobile Header */}
+                <div className="md:hidden bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+                    <button onClick={() => setIsSidebarOpen(true)} className="p-2 -ml-2 text-gray-700">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                    <span className="font-semibold text-gray-900">Admin Panel</span>
+                    <div className="w-8"></div> {/* Spacer for alignment */}
+                </div>
 
                 <main className="flex-1 overflow-auto p-4 md:p-8">
                     {children}
@@ -63,3 +78,4 @@ export default function AdminLayout({
         </div>
     )
 }
+

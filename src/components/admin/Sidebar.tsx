@@ -22,9 +22,10 @@ import { useAuth } from '@/hooks/useAuth'
 interface SidebarProps {
     isOpen: boolean
     onClose: () => void
+    mobile?: boolean
 }
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+export default function Sidebar({ isOpen, onClose, mobile }: SidebarProps) {
     const pathname = usePathname()
     const { logout } = useAuth()
 
@@ -53,9 +54,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
     return (
         <>
-            {/* Overlay for mobile */}
+            {/* Overlay for mobile - handled by parent in mobile view */}
             <AnimatePresence>
-                {isOpen && (
+                {isOpen && !mobile && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -70,11 +71,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <motion.aside
                 initial={false}
                 animate={{
-                    x: isOpen ? 0 : -280,
+                    x: mobile ? 0 : (isOpen ? 0 : -280),
                 }}
                 transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                className="fixed left-0 top-0 h-full w-70 bg-gray-900 text-white z-50 md:translate-x-0 flex flex-col"
-                style={{ width: '280px' }}
+                className={`${mobile ? 'absolute inset-0 w-full' : 'fixed left-0 top-0 h-full w-70'} bg-gray-900 text-white z-50 md:translate-x-0 flex flex-col`}
+                style={{ width: mobile ? '100%' : '280px' }}
             >
                 {/* Header */}
                 <div className="p-6 border-b border-gray-800 flex items-center justify-between">

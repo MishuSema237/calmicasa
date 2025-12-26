@@ -30,7 +30,7 @@ export async function verifyPassword(password: string, hashedPassword: string): 
 // Generate JWT token
 export function generateToken(payload: TokenPayload): string {
     return jwt.sign(payload, JWT_SECRET, {
-        expiresIn: '7d', // Token expires in 7 days
+        expiresIn: '30d', // Token expires in 30 days
     })
 }
 
@@ -38,8 +38,12 @@ export function generateToken(payload: TokenPayload): string {
 export function verifyToken(token: string): TokenPayload | null {
     try {
         return jwt.verify(token, JWT_SECRET) as TokenPayload
-    } catch (error) {
-        console.error('Token verification failed:', error)
+    } catch (error: any) {
+        if (error.name === 'TokenExpiredError') {
+            console.warn('Authentication token expired')
+        } else {
+            console.error('Token verification failed:', error.message)
+        }
         return null
     }
 }
